@@ -1,0 +1,52 @@
+<%@page import="java.time.DayOfWeek"%>
+<%@page import="java.time.LocalDateTime"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Scriptlet</title>
+</head>
+<body>
+	
+		<%
+			
+		LocalDateTime dateTime=LocalDateTime.now();
+		DayOfWeek dOfW=  dateTime.getDayOfWeek();
+		
+		String message ="";
+		switch(dOfW){
+			
+		case MONDAY:
+			message= " Hello happy monday";
+			break;
+		case TUESDAY:
+			message= " Hello happy tuesday";
+			break;
+		case WEDNESDAY:
+			message= " Hello happy wednesdy";
+			break;
+		case THURSDAY:
+			message= " Hello happy thursday";
+			break;
+		case FRIDAY:
+			message= " Hello happy friday";
+			break;
+		case SATURDAY:
+			message= " Hello happy saturday";
+			break;
+		case SUNDAY:
+			message= " Hello happy sunday";
+			break;
+			
+		default: 
+			message="Invalid Date";
+		}
+		
+		out.print("<h1"+ message +"</h1>");
+		
+		%>
+
+</body>
+</html>

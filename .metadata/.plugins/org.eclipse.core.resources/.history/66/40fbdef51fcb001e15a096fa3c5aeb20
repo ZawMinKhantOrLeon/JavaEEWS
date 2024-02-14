@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Data Jsp</title>
+</head>
+<body>
+	<h1> Employee Information</h1>
+	<p> FirtName : <%= request.getParameter("firstname") %> </p>
+	<p> LastName : <%= request.getParameter("lastname") %> </p>
+	<p> Email : <%= request.getParameter("email") %> </p>
+	<p> Password : <% request.getParameter("password") %> </p>
+	<p> Role : <%= request.getParameter("role") %> </p>
+	<p> Gender : <%= request.getParameter("gender") %> </p>
+	<p> Description : <%= request.getParameter("description") %> </p>
+</body>
+</html>

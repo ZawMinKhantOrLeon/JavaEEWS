@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Session Home</title>
+</head>
+<body>
+	<%
+		String user= (String) session.getAttribute("name");
+	    if(user != null){
+	    	out.print("<h1> You already login </h1>");
+	    	out.print("<h1> Your credential : "+user +"</h1>");
+	    	out.print("<h1> Session Id :  : "+user +"</h1>");
+	    }
+	%>
+</body>
+</html>
