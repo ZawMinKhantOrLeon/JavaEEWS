@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Home Page2</title>
+</head>
+<body>
+ <!-- Header -->
+  <h1> This is Page Header Section </h1>
+  <ul>
+  	 <li> Home </li>
+  	 <li> Contact </li>
+  </ul>
+  <!-- Content -->
+  <h1>This is Home Page 2 Body Content</h1>
+   <p> This is Bla Bla </p>
+   <p> This is Bla Bla </p>
+   <p> This is Bla Bla </p>
+   <p> This is Bla Bla </p>
+   <p> This is Bla Bla </p>
+   <p> This is Bla Bla </p>
+   <p> This is Bla Bla </p>
+   <p> This is Bla Bla </p>
+   
+  <!-- Footer -->
+  <h1> This is Footer Content </h1>
+</body>
+</html>

@@ -19,6 +19,7 @@
 			</select>
 		
 		</p>
+		<button type="submit">Submit</button>
 	</form>
 </body>
 </html>

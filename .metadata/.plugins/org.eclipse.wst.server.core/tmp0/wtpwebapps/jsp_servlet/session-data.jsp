@@ -7,6 +7,8 @@
 <title>Session Data </title>
 </head>
 <body>
+	
+	
 	<%
 		String username= request.getParameter("name");
 		String password = request.getParameter("password");

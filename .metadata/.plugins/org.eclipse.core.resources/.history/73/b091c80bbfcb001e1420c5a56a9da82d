@@ -1,0 +1,37 @@
+package utils;
+
+public final class MinMaxFinder {
+	
+	private MinMaxFinder() {
+		
+	}
+	static <T extends Comparable<T>> T max(T one,T two,T three,T four){
+		T max=one;
+		
+		if(two.compareTo(max) > 0)
+			max=two;
+		
+		if(three.compareTo(max) > 0)
+			max=three;
+		
+		if(four.compareTo(max) > 0)
+			max=four;
+		
+		 return max;
+     }
+    
+    int min(int one,int two,int three,int four){
+		int min=one;
+		
+		if(two<min)
+			min=two;
+		
+		if(three<min)
+			min=three;
+		
+		if(four<min)
+			min=four;
+		
+		 return min;
+     }
+}

@@ -17,5 +17,6 @@
 	
 	%>
 	<h1> Your FavNews Are Set Into Cookies</h1>
+	<a href="cookie-home.jsp">Cookie Home</a>
 </body>
 </html>

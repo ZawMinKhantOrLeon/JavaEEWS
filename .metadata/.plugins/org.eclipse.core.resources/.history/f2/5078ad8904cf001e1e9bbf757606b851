@@ -1,0 +1,18 @@
+package tag;
+
+import java.time.LocalDateTime;
+
+import jakarta.servlet.jsp.JspWriter;
+import jakarta.servlet.jsp.tagext.SimpleTagSupport;
+
+public class DateTimeTag extends SimpleTagSupport {
+	
+	private void doTest() {
+		// TODO Auto-generated method stub
+		
+		JspWriter out = getJspContext().getOut();
+		LocalDateTime today = LocalDateTime.now();
+		out.print(today);
+		
+	}
+}

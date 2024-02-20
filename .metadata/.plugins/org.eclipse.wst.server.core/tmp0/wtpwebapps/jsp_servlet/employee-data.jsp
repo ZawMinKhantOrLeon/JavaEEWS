@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1> Employee Information</h1>
-	<p> FirtName : <%= request.getParameter("firstname") %> </p>
+	<p> FirtName : ${param.firstname } <%-- <%= request.getParameter("firstname") %> --%> </p>
 	<p> LastName : <%= request.getParameter("lastname") %> </p>
 	<p> Email : <%= request.getParameter("email") %> </p>
 	<p> Password : <%= request.getParameter("password").length() > 8 ? "Nice":"Too Short" %> </p>

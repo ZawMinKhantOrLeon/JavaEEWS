@@ -8,6 +8,7 @@
 <title>Session Home</title>
 </head>
 <body>
+   <p>El Language  : ${ sessionScope.name }</p>
 	<%
 		String user= (String) session.getAttribute("name");
 	    if(user != null){
