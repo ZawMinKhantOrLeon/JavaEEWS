@@ -9,6 +9,7 @@
 <body>
 	<%
 	String favNews = request.getParameter("favNews");
+	out.print(favNews);
 	Cookie cookie = new Cookie("jsp_servlet.favNews",favNews);
 	cookie.setMaxAge(60);
 	

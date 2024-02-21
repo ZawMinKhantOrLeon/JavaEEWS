@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@ taglib uri="jakarta.tags.core" prefix="c" %>
+  <%@ taglib uri="jakarta.tags.functions" prefix="fn" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Jstl Functions Jsp</title>
+</head>
+<body>
+	
+	<c:set var="testStr" value="I Like Reading with MgMg"></c:set>
+	
+	<p> apple -> upperCase : ${ fn:toUpperCase("apple") } </p>
+	<p> Apple -> loweCase : ${ fn:toLowerCase("apple") } </p>
+	<p>MgMg Contains ? ${ fn:containsIgnoreCase(testStr,"MgMg") }</p>
+</body>
+</html>

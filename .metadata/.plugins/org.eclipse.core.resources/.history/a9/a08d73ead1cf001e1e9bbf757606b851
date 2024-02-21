@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Jstl Core Redirect</title>
+</head>
+<body>
+	
+	<c:set name="name" value="zawminkhant"></c:set>
+	<c:set name="password" value="apple"></c:set>
+	<c:redirect url="jstl-core-when.jsp"></c:redirect>
+	<c:url var="dynamicLink" value="session-data.jsp">
+		<c:param name="name" value=""></c:param>
+	</c:url>
+</body>
+</html>

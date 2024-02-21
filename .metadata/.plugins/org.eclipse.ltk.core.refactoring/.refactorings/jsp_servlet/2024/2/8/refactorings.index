@@ -3,3 +3,5 @@
 1708333151203	Delete element
 1708333236502	Delete element
 1708403050771	Encapsulate field 'type'
+1708404707768	Move 2 resources to 'lib'
+1708416628768	Move 'jstl-core-scope.jsp' to 'webapp'
