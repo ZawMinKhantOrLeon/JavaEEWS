@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@ taglib uri="jakarta.tags.core" prefix="c" %>
+ <%@ taglib uri="jakarta.tags.fmt" prefix="fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Jstl fmt date</title>
+</head>
+<body>
+	
+	<fmt:parseDate var="dateTime" value="2024-01-22 14:22:16" pattern="yyyy-MM-dd HH:mm:ss"></fmt:parseDate>
+	<p>parseDate : ${dateTime}</p>
+	
+	<p>Date : <fmt:formatDate value="dateTime" type="date" /></p>
+	<p>Time : <fmt:formatDate value="dateTime" type="time" /></p>
+</body>
+</html>
