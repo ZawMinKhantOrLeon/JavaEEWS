@@ -34,6 +34,22 @@ public class Item {
 		this.subTotal= price * quantity;
 		this.issuedDate=LocalDateTime.now();
 	}
+	
+	
+
+	public Item(Long id, String name, String category, Double price, Integer quantity, 
+			Boolean essential, String image, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.category = category;
+		this.price = price;
+		this.quantity = quantity;
+		this.subTotal = price * quantity;
+		this.essential = essential;
+		this.image = image;
+		this.description = description;
+	}
 
 	public Item(Long id, String name, String category, Double price, Integer quantity, Double subTotal,
 			LocalDateTime issuedDate, Boolean essential, String image, Long userId, String description) {
@@ -43,7 +59,7 @@ public class Item {
 		this.category = category;
 		this.price = price;
 		this.quantity = quantity;
-		this.subTotal = subTotal;
+		this.subTotal = price * quantity;
 		this.issuedDate = issuedDate;
 		this.essential = essential;
 		this.image = image;

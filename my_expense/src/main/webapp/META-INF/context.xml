@@ -9,7 +9,7 @@
     username="root"
     password="1234"
     driverClassName="com.mysql.cj.jdbc.Driver"
-    url="jdbc:mysql://127.0.0.1:3306/myexpensedb"
+    url="jdbc:mysql://localhost:3306/myexpensedb"
      />
 
 </Context>
