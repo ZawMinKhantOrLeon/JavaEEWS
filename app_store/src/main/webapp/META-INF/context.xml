@@ -1,0 +1,15 @@
+<Context>
+    <Resource 
+    name="jdbc/dbResource"
+    type="javax.sql.DataSource"
+    auth="Container" 
+    maxIdle="5" 
+    maxTotal="30"
+    maxWaitMillis="10000"
+    username="root"
+    password="1234"
+    driverClassName="com.mysql.cj.jdbc.Driver"
+    url="jdbc:mysql://localhost:3306/appstore"
+     />
+
+</Context>
