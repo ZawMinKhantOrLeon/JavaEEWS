@@ -8,6 +8,10 @@ public class Tag {
 	public Tag() {
 		
 	}
+	
+	public Tag(String name) {
+		this.name= name;
+	}
 	public Tag(Long id, String name) {
 		super();
 		this.id = id;

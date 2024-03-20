@@ -8,6 +8,7 @@
 </head>
 <body>
 	
+	
    <div class="container-fluid">
    	 <div class="row">
    	 	<div class="col-12">
@@ -17,17 +18,24 @@
    	 			<div class="row">
    	 				<div class="col-12 col-md-8">
    	 					<c:forEach var="post" items="${posts}">
+   	 					
+   	 					   <c:url var="detailLinks" value="post">
+                          	<c:param name="mode" value="DETAIL"></c:param>
+                          	<c:param name="postId" value="${post.id }"></c:param>
+                          </c:url>
+                          
    	 						<div class="card m-5">
    	 							<div class="card-img">
-   	 								<img alt="image" class="img-fluid" src="${post.image}">
+   	 								<img alt="image" class="img-fluid" src=" <%= request.getContextPath() %>/resource/image/${post.image}">
    	 							</div>
    	 							<div class="card-body text-center">
    	 								<h4 class="card-title">${ post.title }</h4>
    	 								
-   	 								<p class="card-text">${post.description }</p>
+   	 								<h6 class="card-text">${post.description }</h6>
+   	 								
    	 							
    	 							</div>
-   	 							 <button href="#" class="btn btn-info">View</button>
+   	 							 <a href="${detailLinks }" class="btn btn-secondary">View</a>
    	 						</div>
    	 					</c:forEach>
    	 				</div>

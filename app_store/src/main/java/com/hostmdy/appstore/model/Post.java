@@ -9,7 +9,8 @@ public class Post {
 	private String image;
 	private String title;
 	private String description;
-	private LocalDateTime release_date;
+	private String release_date;
+	private String app_link;
 	private String min_req;
 	private LocalDateTime created_at;
 	private LocalDateTime updated_at;
@@ -18,7 +19,7 @@ public class Post {
 		
 	}
 
-	public Post(Long id, Long user_id, String image, String title, String description, LocalDateTime release_date,
+	public Post(Long id, Long user_id, String image, String title, String description, String release_date,
 			String min_req, LocalDateTime created_at, LocalDateTime updated_at) {
 		super();
 		this.id = id;
@@ -34,8 +35,8 @@ public class Post {
 	
 	
 
-	public Post(Long user_id, String image, String title, String description, LocalDateTime release_date,
-			String min_req) {
+	public Post(Long user_id, String image, String title, String description, String release_date,
+			String min_req, String app_link) {
 		super();
 		this.user_id = user_id;
 		this.image = image;
@@ -43,6 +44,7 @@ public class Post {
 		this.description = description;
 		this.release_date = release_date;
 		this.min_req = min_req;
+		this.app_link= app_link;
 	}
 
 	public Long getId() {
@@ -85,11 +87,11 @@ public class Post {
 		this.description = description;
 	}
 
-	public LocalDateTime getRelease_date() {
+	public String getRelease_date() {
 		return release_date;
 	}
 
-	public void setRelease_date(LocalDateTime release_date) {
+	public void setRelease_date(String release_date) {
 		this.release_date = release_date;
 	}
 

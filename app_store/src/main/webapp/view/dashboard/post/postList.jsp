@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
+<%@ taglib uri="jakarta.tags.functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,7 @@
 	<c:import url="../../common/dnav.jsp" />
 
 	<div class="container mt-5">
+		<h4 class="text-center mb-5">Post List</h4>
 		<table id="example" class="table table-striped" style="width: 100%">
 			<thead>
 				<tr>

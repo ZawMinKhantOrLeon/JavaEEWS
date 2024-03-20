@@ -1,25 +1,13 @@
 package com.hostmdy.appstore.controller;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.List;
-
+import java.util.Random;
 import javax.sql.DataSource;
-
-import org.apache.tomcat.jakartaee.commons.compress.utils.FileNameUtils;
-
 import com.hostmdy.appstore.model.Post;
 import com.hostmdy.appstore.model.PostDAO;
-
 import jakarta.annotation.Resource;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -74,6 +62,8 @@ public class PostController extends HttpServlet {
 		case "CREATE":
 			createPost(req, resp);
 			break;
+		case "DETAIL":
+			 showDetail(req, resp);
 		}
 		
 		
@@ -87,46 +77,81 @@ public class PostController extends HttpServlet {
 	}
 	
 	
+	
 	private void showAddForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher  = req.getRequestDispatcher("view/dashboard/post/addPost.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	private String uploadImage(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		Part filePart = req.getPart("image");
-		String fileName = filePart.getSubmittedFileName();
-		String extension = filePart.getSubmittedFileName().substring(fileName.indexOf(".")+1);
-		String newFilename = filePart.getName()+"_"+Math.random()+"."+extension;
-		BufferedInputStream bufferIn = new BufferedInputStream(filePart.getInputStream());
 		
-		BufferedOutputStream bufferOut = new BufferedOutputStream(new FileOutputStream("C:\\Users\\User\\Desktop\\javaEEWS\\app_store\\src\\main\\webapp\\images\\"+newFilename));
+		   // Retrieves the file part from the request
 		
-		byte[] buffer = new byte[4096];
+		Random random  = new Random();
+        Part filePart = req.getPart("image");
+        String fileName = filePart.getSubmittedFileName();
+        String extension = filePart.getSubmittedFileName().substring(fileName.indexOf(".")+1);
+        String newFilename = filePart.getName()+random.nextInt(0,100)+"."+extension;
+        InputStream fileContent = filePart.getInputStream();
+        String uploadDirectory = "C:\\Users\\User\\Desktop\\javaEEWS\\app_store\\src\\main\\webapp\\resource\\image\\" ;
+        Files.copy(fileContent, Paths.get(uploadDirectory + newFilename));
+
+      
+        fileContent.close();
+        
+        
+        
+        
+        return newFilename;
 		
-		bufferOut.write(buffer,0,buffer.length);
+//		Random random = new Random();
+//		Part filePart = req.getPart("image");
+//		String fileName = filePart.getSubmittedFileName();
+//		String extension = filePart.getSubmittedFileName().substring(fileName.indexOf(".")+1);
+//		String newFilename = filePart.getName()+random.nextInt(0,100)+"."+extension;
+//	    InputStream inputS = filePart.getInputStream();
+//		BufferedOutputStream bufferOut = new BufferedOutputStream(new FileOutputStream("C:\\Users\\User\\Desktop\\javaEEWS\\app_store\\src\\main\\webapp\\resource\\image\\"+fileName));
+//		
+//		byte[] buffer = new byte[4096];
+//		
+//		bufferOut.write(buffer,0,buffer.length);
+//		
+//		while(inputS.read(buffer,0,buffer.length) != -1) {
+//			bufferOut.write(buffer,0,buffer.length);
+//		}
+//		inputS.close();
+//		bufferOut.close();
+//		return newFilename;
+//		
+	
 		
-		while(bufferIn.read(buffer,0,buffer.length) != -1) {
-			bufferOut.write(buffer,0,buffer.length);
-		}
-		bufferIn.close();
-		bufferOut.close();
-		return newFilename;
 	}
 	
 	private void createPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+			
+			
 			
 			String fileName = uploadImage(req, resp);
 			String title= req.getParameter("title");
 			String description = req.getParameter("description");
 			String min_req= req.getParameter("min_req");
-			LocalDateTime datetime= LocalDateTime.parse(req.getParameter("release_date"));
+			String datetime= req.getParameter("release_date");
+			String app_link = req.getParameter("app_link");
 			
-			Post post = new Post(1L,fileName,title,description,datetime,min_req);
+			Post post = new Post(1L,fileName,title,description,datetime,min_req,app_link);
+			Boolean ok=postDAO.createPost(post);
+			if(ok) {
+				req.setAttribute("ok", ok);
+				showAddForm(req, resp);
+			}
+			
+			
 	
 	}
 	
 	private void showAllPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+	
 		List<Post> posts = postDAO.getAllPost();
 		RequestDispatcher dispatcher = req.getRequestDispatcher("view/index.jsp");
 		req.setAttribute("posts", posts);
@@ -140,6 +165,17 @@ public class PostController extends HttpServlet {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("view/dashboard/post/postList.jsp");
 		req.setAttribute("posts", posts);
 		dispatcher.forward(req, resp);
+	}
+	
+	private void showDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		Long id = Long.parseLong(req.getParameter("postId"));
+		Post post = postDAO.getPostById(id);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("view/dashboard/post/postDetail.jsp");
+		req.setAttribute("post", post);
+		dispatcher.forward(req, resp);
+		
 	}
 	
 }
