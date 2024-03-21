@@ -1,6 +1,7 @@
 package com.hostmdy.appstore.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Post {
 	
@@ -14,10 +15,28 @@ public class Post {
 	private String min_req;
 	private LocalDateTime created_at;
 	private LocalDateTime updated_at;
+	private List<String> tagIds;
 	
 	public Post() {
 		
 	}
+	
+	
+
+	public Post(Long id, Long user_id, String image, String title, String description, String release_date,
+			String app_link, String min_req) {
+		super();
+		this.id = id;
+		this.user_id = user_id;
+		this.image = image;
+		this.title = title;
+		this.description = description;
+		this.release_date = release_date;
+		this.app_link = app_link;
+		this.min_req = min_req;
+	}
+
+
 
 	public Post(Long id, Long user_id, String image, String title, String description, String release_date,
 			String min_req, LocalDateTime created_at, LocalDateTime updated_at) {
@@ -117,6 +136,23 @@ public class Post {
 
 	public void setUpdated_at(LocalDateTime updated_at) {
 		this.updated_at = updated_at;
+	}
+	
+
+	public String getApp_link() {
+		return app_link;
+	}
+
+	public void setApp_link(String app_link) {
+		this.app_link = app_link;
+	}
+
+	public List<String> getTagIds() {
+		return tagIds;
+	}
+
+	public void setTagIds(List<String> tagIds) {
+		this.tagIds = tagIds;
 	}
 
 	@Override

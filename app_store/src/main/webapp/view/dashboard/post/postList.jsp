@@ -35,14 +35,25 @@
 			</thead>
 			<tbody>
 				<c:forEach var="post" items="${posts}">
+				
+				 <c:url var="dynamicLink" value="post">
+						 	<c:param name="mode" value="UPDATEFORM"></c:param>
+						 	<c:param name="postId" value="${post.id }"></c:param>
+						 </c:url>
+						 
+						  <c:url var="dynamicDelLink" value="tag">
+						 	<c:param name="mode" value="DELETE"></c:param>
+						 	<c:param name="postId" value="${post.id }"></c:param>
+				</c:url>
+				
 					<tr>
 						<td>${post.id }</td>
 						<td>${post.title }</td>
 						<td>${post.description }</td>
 						<td>${post.image }</td>
 						<td>
-						  <button class="btn btn-primary" >Update</button>
-						  <button class="btn btn-danger">Danger</button>
+						  <a href="${dynamicLink}" class="btn btn-sm btn-primary" >Update</a>
+						  <a href="${dynamicDelLink}" class="btn btn-sm btn-danger">Delete</a>
 						</td>
 					</tr>
 				</c:forEach>

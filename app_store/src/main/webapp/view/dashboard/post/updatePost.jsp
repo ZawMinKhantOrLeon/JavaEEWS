@@ -32,20 +32,21 @@
 			               			 </c:otherwise>
 			               		</c:choose>
 			                </c:if>
-	  	 				<h3 class="text-center">Create Post</h3>
+	  	 				<h3 class="text-center">Update Post</h3>
 	  	 					<form action="post" class="mt-5" method="POST" enctype="multipart/form-data">
-	  	 						<input type="hidden" name="mode" value="CREATE" />
+	  	 						<input type="hidden" name="mode" value="UPDATE" />
+	  	 						<input type="" name="postId" value="${post.id}" />
 							  <div class="mb-3 mt-5">
 								    <label for="title" class="form-label">Title</label>
-								    <input type="text" class="form-control" id="title" name="title" required >								   
+								    <input type="text" class="form-control" id="title" value="${post.title }" name="title" required >								   
 								  </div>
 								  <div class="mb-3">
 								    <label for="description" class="form-label">Description</label>
-								    <textarea type="text" name="description" class="form-control" id="description" required> </textarea>
+								    <textarea type="text" name="description" class="form-control" id="description" required> value="${post.description }"</textarea>
 								  </div>
 								   <div class="mb-3">
 								    <label for="min_req" class="form-label">Min Req</label>
-								   <input type="text" class="form-control" id="min_req" name="min_req" required >	
+								   <input type="text" class="form-control" value="${post.min_req }" id="min_req" name="min_req" required >	
 								  </div>
 								   <div class="mb-3">
 								    <label for="image" class="form-label">Image</label>
@@ -61,7 +62,7 @@
 									
 								  <div class="mb-3">
 								    <label for="app_link" class="form-label">App Link</label>
-								   <input type="text" class="form-control" id="app_link" name="app_link" required >	
+								   <input type="text" class="form-control" id="app_link" value="${post.app_link}" name="app_link" required >	
 								  </div>
 								 <div class="mb-3">
 								    <label for="release_date" class="form-label">Release Date</label>
