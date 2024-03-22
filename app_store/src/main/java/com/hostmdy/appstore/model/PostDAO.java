@@ -25,6 +25,7 @@ public class PostDAO  {
 		this.dataSource = dataSource;
 	}
 	
+	
 	private void closeConnection(Connection connection) {
 			if(connection != null) {
 				try {
@@ -34,6 +35,16 @@ public class PostDAO  {
 					e.printStackTrace();
 				}
 			}
+	}
+	
+	private void createPostTag(Post post,Long lastInsertId) throws SQLException {
+		pstmt = connection.prepareStatement("INSERT INTO post_tag (post_id,tag_id) VALUES (?,?) ;" );
+		List<String> tagIds = post.getTagIds();
+		for(final String tag:tagIds) {
+			pstmt.setLong(1, lastInsertId);
+			pstmt.setLong(2, Long.parseLong(tag));
+			pstmt.executeUpdate() ;
+		}
 	}
 	
 	public Boolean createPost(Post post) {
@@ -61,14 +72,8 @@ public class PostDAO  {
 			}
 			
 			if(rowEff > 0) {
-				pstmt = connection.prepareStatement("INSERT INTO post_tag (post_id,tag_id) VALUES (?,?) ;" );
-				List<String> tagIds = post.getTagIds();
-				for(final String tag:tagIds) {
-					pstmt.setLong(1, lastInsertId);
-					pstmt.setLong(2, Long.parseLong(tag));
-					pstmt.executeUpdate() ;
-				}
 				
+				createPostTag(post, lastInsertId);
 				ok = true;
 				
 			
@@ -169,8 +174,9 @@ public class PostDAO  {
 						 rs.getString("title"),
 						 rs.getString("description"),
 						 rs.getString("release_date"),
-						 rs.getString("min_req"),
-						 rs.getString("app_link")
+						 rs.getString("app_link"),
+						 rs.getString("min_req")
+						
 						 );		 
 			}
 			
@@ -204,15 +210,16 @@ public class PostDAO  {
 				int rowEff=pstmt.executeUpdate();
 				if(rowEff > 0) {
 						
-					pstmt= connection.prepareStatement("UPDATE post_tag SET tag_id=? WHERE post_id = ? ;");
-					List<String> tagIds = post.getTagIds();
-					for(final String tag:tagIds) {
+					pstmt= connection.prepareStatement("DELETE FROM post_tag  WHERE post_id = ? ;");
+					pstmt.setLong(1, post.getId());
+					
+					if(pstmt.executeUpdate() > 0) {
+						 	
+						createPostTag(post, post.getId());
 						
-						pstmt.setLong(1, Long.parseLong(tag));
-						pstmt.setLong(2, post.getId());
-						pstmt.executeUpdate() ;
-					}
-					ok =true;
+						}
+				
+					      ok =true;
 					
 				}
 			} catch (SQLException e) {
@@ -226,4 +233,26 @@ public class PostDAO  {
 			return ok;
 	}
 	
+	public Boolean delete(Long id) {
+		Boolean ok = false;
+		try {
+			connection = dataSource.getConnection();
+			pstmt = connection.prepareStatement("DELETE post,post_tag FROM post INNER JOIN  post_tag  ON post.id = post_tag.post_id  WHERE post.id = ?");
+			pstmt.setLong(1, id);
+
+			
+			if(pstmt.executeUpdate() > 0) {
+				
+				ok = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			closeConnection(connection);
+		}
+		return ok;
+	
+	}
 }

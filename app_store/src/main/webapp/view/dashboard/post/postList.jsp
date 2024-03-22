@@ -37,14 +37,16 @@
 				<c:forEach var="post" items="${posts}">
 				
 				 <c:url var="dynamicLink" value="post">
+				 
 						 	<c:param name="mode" value="UPDATEFORM"></c:param>
 						 	<c:param name="postId" value="${post.id }"></c:param>
-						 </c:url>
+				 </c:url>
 						 
-						  <c:url var="dynamicDelLink" value="tag">
+				   <c:url var="dynamicDelLink" value="post">
+				   
 						 	<c:param name="mode" value="DELETE"></c:param>
 						 	<c:param name="postId" value="${post.id }"></c:param>
-				</c:url>
+				   </c:url>
 				
 					<tr>
 						<td>${post.id }</td>

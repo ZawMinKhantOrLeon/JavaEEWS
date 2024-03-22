@@ -72,6 +72,9 @@ public class PostController extends HttpServlet {
 		case "UPDATE":
 		    update(req, resp);
 		    break;
+		case "DELETE":
+			delete(req,resp);
+			break;
 		}
 		
 		
@@ -179,7 +182,9 @@ public class PostController extends HttpServlet {
 		
 	
 		List<Post> posts = postDAO.getAllPost();
-		RequestDispatcher dispatcher = req.getRequestDispatcher("view/index.jsp");
+		List<Tag>  tags = postDAO.getAllTag();
+ 		RequestDispatcher dispatcher = req.getRequestDispatcher("view/index.jsp");
+ 		req.setAttribute("tags", tags);
 		req.setAttribute("posts", posts);
 		dispatcher.forward(req, resp);
 		
@@ -224,6 +229,15 @@ public class PostController extends HttpServlet {
 			req.setAttribute("ok", ok);
 			showUpdateForm(req, resp);
 		}
+	}
+	
+	private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+			Long id = Long.parseLong(req.getParameter("postId"));
+			Boolean ok = postDAO.delete(id);
+			req.setAttribute("ok", ok);
+			postList(req, resp);
+			
 	}
 	
 }

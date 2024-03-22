@@ -50,12 +50,12 @@
 								  </div>
 								   <div class="mb-3">
 								    <label for="image" class="form-label">Image</label>
-								   <input type="file" class="form-control" id="image" name="image" required>	
+								   <input type="file" class="form-control" id="image" accept="image/jpeg" name="image">	
 								  </div>
 									  
 									  <c:forEach var="tag" items="${tags}">
 										  <div class="form-check form-check-inline p-4">
-											  <input class="form-check-input" name="tag[]" type="checkbox" id="inlineCheckbox1" value="${tag.id}">
+											  <input class="form-check-input" name="tag[]" type="checkbox"  id="inlineCheckbox1" value="${tag.id}">
 											  <label class="form-check-label" for="inlineCheckbox1" >${tag.name}</label>
 										  </div>
 									  </c:forEach>
@@ -66,7 +66,7 @@
 								  </div>
 								 <div class="mb-3">
 								    <label for="release_date" class="form-label">Release Date</label>
-								      <input type="date" class="form-control" id="release_date" name="release_date" required>	
+								      <input type="date" class="form-control" id="release_date" name="release_date" value=${post.release_date } >	
 								  </div>
 								  <button type="submit" class="btn btn-primary ">Create</button>
 							</form>

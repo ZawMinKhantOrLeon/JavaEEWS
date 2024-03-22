@@ -17,9 +17,13 @@
                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                    Tags
                  </a>
-                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">      
-		                 <li><a class="dropdown-item" href="login?mode=LOGOUT">RPG</a></li>
-                 </ul>
+                 
+                		<ul class="dropdown-menu" aria-labelledby="navbarDropdown">     
+                		<c:forEach var="tag" items="${tags}"> 
+	                       <li><a class="dropdown-item" href="#">${tag.name}</a></li>
+	                    </c:forEach>
+                       </ul>
+               
                </li>
                
              </ul>
