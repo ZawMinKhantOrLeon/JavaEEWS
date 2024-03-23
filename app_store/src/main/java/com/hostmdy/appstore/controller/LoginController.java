@@ -1,12 +1,11 @@
 package com.hostmdy.appstore.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import com.hostmdy.appstore.model.User;
 import com.hostmdy.appstore.model.UserDAO;
+
 import jakarta.annotation.Resource;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -15,8 +14,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/user")
-public class UserController extends HttpServlet {
+@WebServlet("/login")
+public class LoginController extends HttpServlet {
 
 	/**
 	 * 
@@ -27,67 +26,62 @@ public class UserController extends HttpServlet {
 	@Resource(name="jdbc/dbResource")
 	DataSource dataSource;
 	
+	
 	@Override
 	public void init() throws ServletException {
 		userDAO = new UserDAO(dataSource);
 	}
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String mode = req.getParameter("mode");
 		
 		if(mode == null) {
-			mode="FORM";
+			mode = "FORM";
 		}
 		
 		switch (mode) {
-		case "FORM":
-			  showSignUpForm(req,resp);
-			  break;
-		case "SIGNUP":
-			  signUp(req,resp);
-			  break;
+		 case "FORM":
+		 	   showLoginForm(req,resp);
+			   break;
+		 case "LOGIN":
+			   login(req,resp);
+			   break;
+		case  "LOGOUT":
+			   logout(req,resp);
+			   break;
+	
 		}
-
-		
-		
-		
 	}
 	
-
+	
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(req, resp);
 	}
 	
-	private void showSignUpForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/view/dashboard/user/sign-up.jsp");
+	
+	
+	private void showLoginForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/view/dashboard/user/sign-in.jsp");
 		dispatcher.forward(req, resp);
 		
 	}
 	
-
-	private void signUp(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException  {
-		// TODO Auto-generated method stub
-		String name = req.getParameter("name");
-		String email = req.getParameter("email");
-		String password = req.getParameter("password");
-		
-		User user = new User(name,email,password);
-		
-		Boolean ok = userDAO.register(user);
-		
-		if(ok) {
-			req.setAttribute("ok", ok);
-			showSignUpForm(req, resp);
-		}
-		
+	private void login(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+			String username = req.getParameter("username");
+			String password = req.getParameter("password");
+			
+			Boolean ok = userDAO.authenticate(username, password);
+			if(ok) {
+				resp.sendRedirect("post");
+			}
 		
 	}
 	
-	
-
+	private void logout(HttpServletRequest req, HttpServletResponse resp) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
